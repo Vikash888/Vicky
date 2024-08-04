@@ -1,16 +1,16 @@
-require('dotenv').config();
 const express = require('express');
-const path = require('path');
-
 const app = express();
-const PORT = process.env.PORT || 3000;
+const port = process.env.PORT || 3000;
 
-app.use(express.static(path.join(__dirname, 'public')));
+// Replace with your actual webhook URL
+const DISCORD_WEBHOOK_URL = 'https://discord.com/api/webhooks/...';
 
-app.get('/api/discord-webhook-url', (req, res) => {
-    res.json({ webhookUrl: process.env.DISCORD_WEBHOOK_URL });
+app.get('/get-webhook-url', (req, res) => {
+    res.json({ url: DISCORD_WEBHOOK_URL });
 });
 
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+app.use(express.static('public'));
+
+app.listen(port, () => {
+    console.log(`Server running at http://localhost:${port}`);
 });
